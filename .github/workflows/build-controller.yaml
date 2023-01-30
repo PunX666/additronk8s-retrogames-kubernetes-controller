@@ -55,7 +55,7 @@ jobs:
           docker buildx build --output "type=image,push=false" ${{ steps.prepare.outputs.buildx_args }}
 
       - name: Log into GitHub Container Registry
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login https://ghcr.io -u ${{ github.actor }} --password-stdin
+        run: echo "${{ secrets.ENGINE }}" | docker login https://ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Docker Buildx (push)
         if: success() && github.event_name != 'pull_request'
