@@ -109,7 +109,7 @@ const createDeploymentSpec = (gameObject, configmaps) => {
           initContainers: [
             {
               name: "hydrate-game",
-              image: "ghcr.io/punx666/additronk8s-game-engine:latest",
+              image: "ghcr.io/PunX666/additronk8s-game-engine:latest",
               imagePullPolicy: "Always",
               command: [
                 "bash",
@@ -121,7 +121,7 @@ const createDeploymentSpec = (gameObject, configmaps) => {
           containers: [
             {
               name: "game-engine",
-              image: "ghcr.io/punx666/additronk8s-game-engine:latest",
+              image: "ghcr.io/PunX666/additronk8s-game-engine:latest",
               imagePullPolicy: "Always",
               env: [
                 {
