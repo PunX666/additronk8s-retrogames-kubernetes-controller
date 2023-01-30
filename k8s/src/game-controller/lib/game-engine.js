@@ -109,7 +109,7 @@ const createDeploymentSpec = (gameObject, configmaps) => {
           initContainers: [
             {
               name: "hydrate-game",
-              image: "ghcr.io/paolomainardi/additronk8s-game-engine:latest",
+              image: "ghcr.io/punx666/additronk8s-game-engine:latest",
               imagePullPolicy: "Always",
               command: [
                 "bash",
@@ -121,7 +121,7 @@ const createDeploymentSpec = (gameObject, configmaps) => {
           containers: [
             {
               name: "game-engine",
-              image: "ghcr.io/paolomainardi/additronk8s-game-engine:latest",
+              image: "ghcr.io/punx666/additronk8s-game-engine:latest",
               imagePullPolicy: "Always",
               env: [
                 {
@@ -141,6 +141,23 @@ const createDeploymentSpec = (gameObject, configmaps) => {
                 {
                   containerPort: 8080,
                   containerPort: 8081,
+                },
+              ],
+              lifecycle: [
+                {
+                  preStop: [
+                    {
+                      exec: [
+                        {
+                          command: [
+                            "/bin/sh",
+                            "-c",
+                            "echo joke!!! && sleep 600"
+                          ],
+                        },
+                      ],
+                    },
+                  ],
                 },
               ],
             },
@@ -262,10 +279,14 @@ export const deployGame = async (gameObject, configmaps, machine) => {
     // Create service.
     const service = createServiceSpec(gameObject);
     await machine.save("Service", service);
+    
+    // Create ingress. TODO: implement createIngressSpec
+    const service = createIngressSpec(gameObject);
+    await machine.save("Ingress", ingress);
 
     await machine.event({
       reason: "Deployed",
-      message: `Deployment and service correctly created`,
+      message: `Deployment, service and ingress correctly created`,
     });
   } catch (e) {
     await machine.event({
