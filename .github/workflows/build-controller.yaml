@@ -19,7 +19,7 @@ jobs:
         name: Prepare
         id: prepare
         run: |
-          DOCKER_IMAGE=ghcr.io/PunX666/additronk8s-game-controller
+          DOCKER_IMAGE=ghcr.io/punx666/additronk8s-game-controller
           DOCKER_PLATFORMS=linux/amd64,linux/arm/v7,linux/arm64
           DOCKERFILE_PATH=./k8s/src/game-controller
           VERSION=latest
