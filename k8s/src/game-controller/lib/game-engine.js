@@ -80,6 +80,43 @@ const createServiceSpec = (gameObject) => {
 
 /**
  *
+ * @param {*} gameObject
+ */
+const createIngressSpec = (gameObject) => {
+  const name = gameObject.metadata.name;
+  const ingress = {
+    metadata: {
+      name: name,
+      labels: {
+        app: name,
+      },
+    },
+    /**
+    spec: {
+      selector: {
+        app: name,
+      },
+      ports: [
+        {
+          name: "vnc",
+          protocol: "TCP",
+          port: 8080,
+          containerPort: 8080,
+        },
+        {
+          name: "audio",
+          protocol: "TCP",
+          port: 8081,
+          containerPort: 8081,
+        },
+      ],
+    },
+  };
+  return ingress;
+};
+*/
+/**
+ *
  * @param {*} name
  * @param {*} configmaps
  */
